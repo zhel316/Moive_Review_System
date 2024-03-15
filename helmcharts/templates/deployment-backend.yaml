@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.backend.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.api.app }}
+  replicas: {{ .Values.backend.api.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.backend.api.strategy.maxUnavailable }}
+      maxSurge: {{ .Values.backend.api.strategy.maxSurge }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.api.app }}
+    spec:
+      containers:
+      - name: {{ .Values.backend.api.container.name }}
+        image: "{{ .Values.backend.api.container.image }}"
+        resources:
+          requests:
+            cpu: {{ .Values.cpu }}
+            memory: {{ .Values.memory }}
+        ports:
+        - containerPort: {{ .Values.backend.api.container.port }}
+          protocol: TCP
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.name }}
+              key: {{ .Values.secret.postgresDbKey }}
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.name }}
+              key: {{ .Values.secret.postgresUserKey }}
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.secret.name }}
+              key: {{ .Values.secret.postgresPasswordKey }}
+      restartPolicy: Always

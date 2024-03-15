@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: moviesmanagement
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      - myappnet
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/csvs:/csvs
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ./film_backend
+    volumes:
+      - ./film_backend:/app
+    networks:
+      - myappnet
+    ports:
+      - "12345:12345"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:mysecretpassword@db:5432/moviesmanagement
+
+  frontend:
+    build: ./film_frontend
+    ports:
+      - "80:80" # 将宿主机的端口 80 映射到容器的端口 80
+    depends_on:
+      - backend # 假设你的后端服务名为 backend
+
+networks:
+  myappnet:
+    driver: bridge
+
+volumes:
+  db_data:

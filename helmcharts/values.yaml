@@ -1,0 +1,245 @@
+# Default values for filmcomments.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+secret:
+  name: db-credentials
+  postgresDbKey: postgres-db
+  postgresUserKey: postgres-user
+  postgresPasswordKey: postgres-password
+  postgresDbValue: bW92aWVzbWFuYWdlbWVudA==
+  postgresUserValue: cG9zdGdyZXM=
+  postgresPasswordValue: bXlzZWNyZXRwYXNzd29yZA==
+  serviceAccountKeyValue: |
+    {
+      "type": "service_account",
+      "project_id": "kube2014",
+      "private_key_id": "32696e3960c0e1c11b6709778e8ba0d47366810b",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCZctOzwiVedI6W\nf3Fi4wklmCihm7F2LQKBYX9lN6Ysed8y8iA3yS7O9ziis0qLvuFrw1mTSjhJ1Uhl\nJbnvlX3vUdLVZm6i9ZQ8aSSQtIrn/q6YNY3Dy4Oj12L3RBsji/P18f2NQ1+doRkP\niQNeVVQ/EOCYGKYDsobhALpjelxd62c9WrnuXXMLFJzjPsH4XGuufnuHQIxXVtHW\nhuAP7IOVMToL2SJOWcYeAyDkaEqAUO0ZTNi1LPxK3jTxB/pL0W4dquFS9UT4Qqhf\n4GNBcukRH6sRJDbrva9cfPvLmQiqytn7+Fq31X7Gq5UFiCP1ABCllTgfhSBGUuVD\nURCMQ7wfAgMBAAECggEAQba9FsRUAIll7umRA0o7RpBNBjiI3RUVd5brWctlLLLc\ndRLf3UQY+aVB6dtiV0pdeyrjl4I3bNcb88UeRY39qpmd8qm1Q7Br1Rsp/5Zxzjxx\nRNnaZjknnOjGhyHxhV2QEomZjf+GWRj+hHqmqKVeOMvfgwM7RWYVARKwv51NJSLb\nBsf0ze/CCLQOSiduHSZ/djyP+keeF8vTqgdCmDT5cU+YfinkyY8hlukqxyb8mLbc\nQ7NfVdJtylW09AilGptJQavUlI8AIQtE+/qeZXaxQTTQ0l3N71hIR0wfaWoYaY5X\nPU9DMEpfho/iTL+MwX2pj1+Ji1TplRhWfSBR2w+gkQKBgQDHPjj4hQ1fk1cUZHsn\nf7WXSyXFWnnsDtwbbNIyancy1kr/nXb0dNhSNrvPIwKuXf706mh5/3txxTMtrbsw\nkLDo0sJJVtdH4N1K3NBI8p+bQJbAu5Kv7rsODJaIl5/HQx60ja+DG3WhACDIPjJB\ntYA4v371oLMKiXcksy7w7/VakwKBgQDFKQtuImXzBynsHeEsIlJS5QP45il632bs\nk6x/+K959BE/ESjjZ/a5hGoXwkr+/npsQaYdypC52uJmyLsXYPfN3yOR8WTto7Aa\n/NYtwP8ieIgFbqDUhxGzuQwrYrv2KC5Rp4Hh9WJ6CLttWGJ5zIxZKD5GoOmADmLF\nM5lP+kdzxQKBgQC8Ri79oHUPsKJj0cOSgpqtGcTaZfG6QBx8Cevi2jpDHr6GJ10m\nCVf08GWuic3ZyVbIRs1tIx+aVZdT/cxaSw/xIl+Xf+k0sedK+7gShrqNsY4DF/y4\nJSY7U2fYMTc5y1IzmYOVp5gTCJTxw9wnvYQpm8M0BqPJPDcKxguAf6/g4wKBgQCI\nvvoVjjglwo86HFND+B4fLoZ9yK12cqKBbb9UFxkmPbkEhBNW/pGqhIPNLM41ZC1n\nDnV37jpJHd6vqYPSKEhXeu/B1qrJBCIt5bVrkJOkxfKZyew02+XUQIGHSfjSN3ZA\n3iyAm2CNAad1pLrQfaXOZNIkzJCHZ/LrkelBBncufQKBgCeJ1GFlB1mHFrVC+4Ay\nh7OpnNR/qZpDcMp5BELFwPo7rtXCxl2absKeJXTWJy8cRGdLlKeNptt3wf/PQDET\nWPiXdr9h23aT6YhftzF0Mf6ZEva1mlPHcPIvDtW6bLOvzM65sqZT7OyeqZ5YMXo2\nc7D12zZwOKy6ww2g+2TnLu0C\n-----END PRIVATE KEY-----\n",
+      "client_email": "getkubedata@kube2014.iam.gserviceaccount.com",
+      "client_id": "106299631937441113213",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/getkubedata%40kube2014.iam.gserviceaccount.com",
+      "universe_domain": "googleapis.com"
+    }
+
+frontend:
+  name: filmcomments-frontend-deployment
+  selector:
+    app: filmcomments-frontend
+  replicas: 1
+  container:
+    name: filmcomments-frontend-container
+    image: liuzhe2022/filmcomments-web:v2
+    port: 80
+  service:
+    name: filmcomments-fronted-service
+    port: 80
+    targetPort: 80
+    type: LoadBalancer
+
+
+cpu: "250m"
+memory: "500Mi"
+
+backend:
+  name: filmcomments-api-deployment
+  api:
+    app: filmcomments-api
+    replicaCount: 1
+    strategy:
+      maxUnavailable: 1
+      maxSurge: 1
+    container:
+      name: filmcomments-api-container
+      image: liuzhe2022/filmcomments-api:v1
+      port: 5000
+    service:
+      name: filmcomments-api-service
+      port: 5000
+      targetPort: 5000
+      type: LoadBalancer
+    env:
+      postgres:
+        db:
+          secret: db-credentials
+          key: postgres-db
+        user:
+          secret: db-credentials
+          key: postgres-user
+        password:
+          secret: db-credentials
+          key: postgres-password
+
+#securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+postgresservice:
+  name: postgres-service
+  service:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: postgres
+
+pvc:
+  name: db-data-pvc
+  accessMode: ReadWriteOnce
+  size: 1Gi
+  storageClassName: standard-rwo
+
+postgres:
+  name: postgres-deployment
+  replicaCount: 1
+  label: postgres
+  strategy:
+    type: Recreate
+  init:
+    image: google/cloud-sdk
+    scripts:
+    - name: init.sql
+      bucket: gs://kube_database/init.sql
+    - name: csvs
+      bucket: gs://kube_database/csvs/*
+    mountPath: /docker-entrypoint-initdb.d
+    csvMountPath: /csvs
+  image: postgres:latest
+  imagePullPolicy: IfNotPresent
+  dbName: my-database
+  user: user
+  password: password
+  persistence:
+    volumeClaimName: db-data-pvc
+    mountPath: /var/lib/postgresql/data
+    newmountpath: /var/lib/postgresql/data/pgdata
+  cloudsqlCreds:
+    secretName: db-credentials
+    mountPath: /secrets
+  ports: 5432
+
+hpa:
+  name: api-hpa
+  namespace: default
+  scaleTargetRef:
+    kind: Deployment
+    name: filmcomments-api-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+frontendHpa:
+  name: frontend-hpa
+  namespace: default
+  scaleTargetRef:
+    name: filmcomments-frontend-deployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    resource:
+      target:
+        averageUtilization: 50
+
+managedCert:
+  name: my-managed-cert
+  domains:
+  - myfilmcomm.com
+
+ingress:
+  name: "my-ingress"
+  managedCertificates: "my-managed-cert"
+  host: "myfilmcomm.com"
+  paths:
+    path: "/"
+    pathType: "Prefix"
+  service:
+    name: "filmcomments-fronted-service"
+    port: 80
+
+cicdRole:
+  name: my-cicd-role
+  rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "watch", "list", "create", "update", "patch", "delete"]
+
+cicdRoleBinding:
+  name: cicd-binding
+  subjects:
+  - kind: ServiceAccount
+    name: cicd-team
+    namespace: default
+    apiGroup: ""
+
+serviceAccount:
+  name: cicd-team
+  namespace: default
+
+role:
+  name: developer
+  rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["deployments", "replicasets", "pods", "configmaps"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+
+roleBinding:
+  name: developer-binding
+  subjects:
+  - kind: User
+    name: lainuu666@gmail.com
+    apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: liuzhe6543@gmail.com
+    apiGroup: rbac.authorization.k8s.io
+
+clusterRole:
+  name: devops
+
+clusterRoleBinding:
+  name: devops-binding
+
+authserviceAccount:
+  name: devops-team
+  namespace: default
+
+networkPolicyapi:
+  name: allow-backend-from-all
+  matchLabels:
+    app: filmcomments-api
+
+networkPolicyfr:
+  name: allow-frontend-from-all
+  matchLabels:
+    app: filmcomments-frontend
+
+networkPolicy:
+  name: allow-db-access-from-frontend-backend
+  namespace: default
+  podSelector:
+    app: postgres
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: filmcomments-frontend
+    - podSelector:
+        matchLabels:
+          app: filmcomments-api
+

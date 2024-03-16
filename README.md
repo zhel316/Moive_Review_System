@@ -1,8 +1,9 @@
 # Application Architecture
 ## UML Diagram for Database 
 [IMDB 5000 Movie Dataset](https://www.kaggle.com/datasets/carolzhangdc/imdb-5000-movie-dataset?resource=download)
-## Interactive Components
-
+[UML Diagram](./images/UML.png)
+## Interactive Components and Flow
+[Data Flow in Web Application Architecture](./images/Flow.png)
 # Deployment Environment
 ## Google Kubernetes Engine
 - Our environment for running and deploying containers is GKE which provides the load balancer and SSL certificate.
@@ -26,7 +27,7 @@ Ensure you're in the `/Movies_Review_Web_App` directory before executing the com
   cd film_frontend  
   docker buildx build --platform linux/amd64 -t liuzhe2022/filmcomments-web:latest --push .
 ```
-3. Command for building backend image.  
+2. Command for building backend image.  
 ```
    cd film_backend   
    docker buildx build --platform linux/amd64 -t liuzhe2022/filmcomments-api:latest --push .

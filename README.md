@@ -1,6 +1,6 @@
 # Application Architecture
 ## UML Diagram for Database 
-[IMDB 5000 Movie Dataset](https://www.kaggle.com/datasets/carolzhangdc/imdb-5000-movie-dataset?resource=download)
+[IMDB 5000 Movie Dataset](https://www.kaggle.com/datasets/carolzhangdc/imdb-5000-movie-dataset?resource=download) \\
 [UML Diagram](./images/UML.png)
 ## Interactive Components and Flow
 [Data Flow in Web Application Architecture](./images/Flow.png)
@@ -41,7 +41,7 @@ helm install app-release1 ./helmcharts
 ### helm scaling
 ```
 kubectl scale deployment app-release1-filmcomments-frontend --replicas=3
-kubectl get deployments -n my-app
+kubectl get deployments
 ```
 ### helm uninstall
 ```
